@@ -5,21 +5,17 @@ import ReactDOM from 'react-dom';
 import ContactList from './components/ContactList.jsx';
 
 const contacts = [{
-	name: 'Arun', 
-	phone: 111,
-	id: 1
+	name: 'Arun',
+	phone: 111
 }, {
 	name: 'Sai',
-	phone: 222,
-	id: 2
+	phone: 222
 }, {
 	name: 'Vasinee',
-	phone: 333,
-	id: 3
+	phone: 333
 }, {
 	name: 'Erica',
-	phone: 444,
-	id: 4
+	phone: 444
 }];
 
 ReactDOM.render(<ContactList contacts={contacts} />, document.getElementById('app'));
