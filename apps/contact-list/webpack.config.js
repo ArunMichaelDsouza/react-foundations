@@ -1,5 +1,3 @@
-var path = require('path');
-
 module.exports = {
     entry: './src/app.js',
     output: {
@@ -7,7 +5,7 @@ module.exports = {
     },
     module: {
         loaders: [{
-            test: [/\.jsx?$/, /\.js?$/],
+            test: [/\.jsx?$/],
             loader: 'babel-loader',
             exclude: /node_modules/,
             query: {
