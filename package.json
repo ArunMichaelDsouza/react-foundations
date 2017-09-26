@@ -1,7 +1,7 @@
 {
   "name": "react-foundations",
   "version": "1.0.0",
-  "description": "Playing around with React 15",
+  "description": "Playing around with React JS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
