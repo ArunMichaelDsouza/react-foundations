@@ -971,13 +971,13 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _ErrorBoundary = __webpack_require__(34);
+var _ErrorBoundaries = __webpack_require__(33);
 
-var _ErrorBoundary2 = _interopRequireDefault(_ErrorBoundary);
+var _ErrorBoundaries2 = _interopRequireDefault(_ErrorBoundaries);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_ErrorBoundary2.default, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_ErrorBoundaries2.default, null), document.getElementById('app'));
 // import { FragmentsArray, FragmentsString } from './snippets/Fragments.jsx';
 // const Fragments = <div><FragmentsArray /><FragmentsString /></div>;
 
@@ -9559,8 +9559,7 @@ module.exports = function () {
 
 /***/ }),
 /* 32 */,
-/* 33 */,
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9621,13 +9620,13 @@ var Child = function (_Component) {
     return Child;
 }(_react.Component);
 
-var ErrorBoundary = function (_Component2) {
-    _inherits(ErrorBoundary, _Component2);
+var ErrorBoundaries = function (_Component2) {
+    _inherits(ErrorBoundaries, _Component2);
 
-    function ErrorBoundary(props) {
-        _classCallCheck(this, ErrorBoundary);
+    function ErrorBoundaries(props) {
+        _classCallCheck(this, ErrorBoundaries);
 
-        var _this2 = _possibleConstructorReturn(this, (ErrorBoundary.__proto__ || Object.getPrototypeOf(ErrorBoundary)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (ErrorBoundaries.__proto__ || Object.getPrototypeOf(ErrorBoundaries)).call(this, props));
 
         _this2.state = {
             errorInChild: false
@@ -9635,7 +9634,7 @@ var ErrorBoundary = function (_Component2) {
         return _this2;
     }
 
-    _createClass(ErrorBoundary, [{
+    _createClass(ErrorBoundaries, [{
         key: 'componentDidCatch',
         value: function componentDidCatch(error, info) {
             this.setState({ errorInChild: true });
@@ -9651,10 +9650,10 @@ var ErrorBoundary = function (_Component2) {
         }
     }]);
 
-    return ErrorBoundary;
+    return ErrorBoundaries;
 }(_react.Component);
 
-exports.default = ErrorBoundary;
+exports.default = ErrorBoundaries;
 
 /***/ })
 /******/ ]);

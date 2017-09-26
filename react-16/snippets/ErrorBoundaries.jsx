@@ -22,7 +22,7 @@ class Child extends Component {
     }
 }
 
-class ErrorBoundary extends Component {
+class ErrorBoundaries extends Component {
     constructor(props) {
         super(props);
 
@@ -40,4 +40,4 @@ class ErrorBoundary extends Component {
     }
 }
 
-export default ErrorBoundary;
+export default ErrorBoundaries;
