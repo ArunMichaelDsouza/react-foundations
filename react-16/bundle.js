@@ -9596,8 +9596,9 @@ var App = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-		_this.state = { showModal: false };
+		_this.state = { showModal: false, clicks: 0 };
 		_this.modalHandler = _this.modalHandler.bind(_this);
+		_this.handleClick = _this.handleClick.bind(_this);
 		return _this;
 	}
 
@@ -9605,6 +9606,12 @@ var App = function (_Component) {
 		key: 'modalHandler',
 		value: function modalHandler() {
 			this.setState({ showModal: true });
+		}
+	}, {
+		key: 'handleClick',
+		value: function handleClick() {
+			var clicks = this.state.clicks;
+			this.setState({ clicks: clicks + 1 });
 		}
 	}, {
 		key: 'render',
@@ -9628,18 +9635,30 @@ var App = function (_Component) {
 				'div',
 				{ style: appStyles },
 				'App',
+				_react2.default.createElement('br', null),
+				this.state.clicks,
+				_react2.default.createElement('br', null),
 				_react2.default.createElement(
 					'button',
 					{ onClick: this.modalHandler },
 					'Open modal'
 				),
 				this.state.showModal ? _react2.default.createElement(
-					Modal,
-					null,
+					'div',
+					{ onClick: this.handleClick },
 					_react2.default.createElement(
-						'div',
-						{ style: modalStyles },
-						'Modal'
+						Modal,
+						null,
+						_react2.default.createElement(
+							'div',
+							{ style: modalStyles },
+							'Modal',
+							_react2.default.createElement(
+								'button',
+								null,
+								'click'
+							)
+						)
 					)
 				) : ''
 			);

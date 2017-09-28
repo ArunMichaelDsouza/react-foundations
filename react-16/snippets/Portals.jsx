@@ -7,12 +7,18 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { showModal: false };
+		this.state = { showModal: false, clicks: 0 };
 		this.modalHandler = this.modalHandler.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	modalHandler() {
 		this.setState({ showModal: true });
+	}
+
+	handleClick() {
+		const clicks = this.state.clicks;
+		this.setState({ clicks: clicks + 1 });
 	}
 
 	render() {
@@ -33,9 +39,12 @@ class App extends Component {
 		return (
 			<div style={appStyles}>
 				App
+				<br/>
+				{this.state.clicks}
+				<br/>
 				<button onClick={this.modalHandler}>Open modal</button>
 				{
-					this.state.showModal ? <Modal><div style={modalStyles}>Modal</div></Modal> : ''
+					this.state.showModal ? <div onClick={this.handleClick}><Modal><div style={modalStyles}>Modal<button>click</button></div></Modal></div> : ''
 				}
 			</div>
 		);
