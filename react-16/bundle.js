@@ -971,15 +971,14 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _ErrorBoundaries = __webpack_require__(33);
-
-var _ErrorBoundaries2 = _interopRequireDefault(_ErrorBoundaries);
+var _Portals = __webpack_require__(32);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_ErrorBoundaries2.default, null), document.getElementById('app'));
+_reactDom2.default.render(_react2.default.createElement(_Portals.App, null), document.getElementById('app'));
 // import { FragmentsArray, FragmentsString } from './snippets/Fragments.jsx';
 // const Fragments = <div><FragmentsArray /><FragmentsString /></div>;
+// import ErrorBoundaries from './snippets/ErrorBoundaries.jsx';
 
 /***/ }),
 /* 16 */
@@ -9558,22 +9557,26 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 32 */,
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
+exports.App = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(18);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9583,77 +9586,89 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Child = function (_Component) {
-    _inherits(Child, _Component);
+var modalNode = document.getElementById('modal');
 
-    function Child(props) {
-        _classCallCheck(this, Child);
+var App = function (_Component) {
+	_inherits(App, _Component);
 
-        var _this = _possibleConstructorReturn(this, (Child.__proto__ || Object.getPrototypeOf(Child)).call(this, props));
+	function App(props) {
+		_classCallCheck(this, App);
 
-        _this.state = {
-            error: false
-        };
-        _this.handleClick = _this.handleClick.bind(_this);
-        return _this;
-    }
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _createClass(Child, [{
-        key: 'handleClick',
-        value: function handleClick() {
-            this.setState({ error: true });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            if (this.state.error) {
-                throw new Error('I crashed!');
-            }
-            return _react2.default.createElement(
-                'button',
-                { onClick: this.handleClick },
-                'Error'
-            );
-        }
-    }]);
+		_this.state = { showModal: false };
+		_this.modalHandler = _this.modalHandler.bind(_this);
+		return _this;
+	}
 
-    return Child;
+	_createClass(App, [{
+		key: 'modalHandler',
+		value: function modalHandler() {
+			this.setState({ showModal: true });
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var appStyles = {
+				width: 200,
+				height: 200,
+				backgroundColor: '#ddd'
+			},
+			    modalStyles = {
+				backgroundColor: 'rgba(0,0,0,.25)',
+				position: 'fixed',
+				width: '100%',
+				height: '100%',
+				top: 0,
+				left: 0,
+				textAlign: 'center'
+			};
+
+			return _react2.default.createElement(
+				'div',
+				{ style: appStyles },
+				'App',
+				_react2.default.createElement(
+					'button',
+					{ onClick: this.modalHandler },
+					'Open modal'
+				),
+				this.state.showModal ? _react2.default.createElement(
+					Modal,
+					null,
+					_react2.default.createElement(
+						'div',
+						{ style: modalStyles },
+						'Modal'
+					)
+				) : ''
+			);
+		}
+	}]);
+
+	return App;
 }(_react.Component);
 
-var ErrorBoundaries = function (_Component2) {
-    _inherits(ErrorBoundaries, _Component2);
+var Modal = function (_Component2) {
+	_inherits(Modal, _Component2);
 
-    function ErrorBoundaries(props) {
-        _classCallCheck(this, ErrorBoundaries);
+	function Modal(props) {
+		_classCallCheck(this, Modal);
 
-        var _this2 = _possibleConstructorReturn(this, (ErrorBoundaries.__proto__ || Object.getPrototypeOf(ErrorBoundaries)).call(this, props));
+		return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+	}
 
-        _this2.state = {
-            errorInChild: false
-        };
-        return _this2;
-    }
+	_createClass(Modal, [{
+		key: 'render',
+		value: function render() {
+			return _reactDom2.default.createPortal(this.props.children, modalNode);
+		}
+	}]);
 
-    _createClass(ErrorBoundaries, [{
-        key: 'componentDidCatch',
-        value: function componentDidCatch(error, info) {
-            this.setState({ errorInChild: true });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return this.state.errorInChild ? _react2.default.createElement(
-                'div',
-                null,
-                'Error occured!'
-            ) : _react2.default.createElement(Child, null);
-        }
-    }]);
-
-    return ErrorBoundaries;
+	return Modal;
 }(_react.Component);
 
-exports.default = ErrorBoundaries;
+exports.App = App;
 
 /***/ })
 /******/ ]);

@@ -32,7 +32,7 @@ class ErrorBoundaries extends Component {
     }
 
     componentDidCatch(error, info) {
-        this.setState({ errorInChild: true })
+        this.setState({ errorInChild: true });
     }
 
     render() {
