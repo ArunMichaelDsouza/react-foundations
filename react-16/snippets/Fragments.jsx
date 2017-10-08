@@ -8,9 +8,7 @@ const FragmentsArray = () => {
 	];
 },
 	FragmentsString = () => {
-		render() {
- 			return 'Just a string';
- 		}
+ 		return 'Just a string';
 	};
 
 export { FragmentsArray, FragmentsString };

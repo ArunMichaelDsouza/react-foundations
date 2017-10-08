@@ -971,17 +971,16 @@ var _reactDom = __webpack_require__(18);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _CustomAttributes = __webpack_require__(33);
-
-var _CustomAttributes2 = _interopRequireDefault(_CustomAttributes);
+var _Portals = __webpack_require__(34);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_CustomAttributes2.default, null), document.getElementById('app'));
-// import { FragmentsArray, FragmentsString } from './snippets/Fragments.jsx';
+//import App from './snippets/CustomAttributes.jsx';
+
+_reactDom2.default.render(_react2.default.createElement(_Portals.App, null), document.getElementById('app'));
+//import { FragmentsArray, FragmentsString } from './snippets/Fragments.jsx';
 // const Fragments = <div><FragmentsArray /><FragmentsString /></div>;
-// import ErrorBoundaries from './snippets/ErrorBoundaries.jsx';
-// import { App } from './snippets/Portals.jsx';
+//import ErrorBoundaries from './snippets/ErrorBoundaries.jsx';
 
 /***/ }),
 /* 16 */
@@ -9561,7 +9560,8 @@ module.exports = function () {
 
 /***/ }),
 /* 32 */,
-/* 33 */
+/* 33 */,
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -9570,22 +9570,128 @@ module.exports = function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.App = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = __webpack_require__(18);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
-	return _react2.default.createElement(
-		"div",
-		{ "data-attr": "10", attr: "20" },
-		"App"
-	);
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-exports.default = App;
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var modalNode = document.getElementById('modal');
+
+var App = function (_Component) {
+	_inherits(App, _Component);
+
+	function App(props) {
+		_classCallCheck(this, App);
+
+		var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+		_this.state = { showModal: false, clicks: 0 };
+		_this.modalHandler = _this.modalHandler.bind(_this);
+		_this.handleClick = _this.handleClick.bind(_this);
+		return _this;
+	}
+
+	_createClass(App, [{
+		key: 'modalHandler',
+		value: function modalHandler() {
+			this.setState({ showModal: true });
+		}
+	}, {
+		key: 'handleClick',
+		value: function handleClick() {
+			var clicks = this.state.clicks;
+			this.setState({ clicks: clicks + 1 });
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var appStyles = {
+				width: 200,
+				height: 200,
+				backgroundColor: '#ddd'
+			},
+			    modalStyles = {
+				backgroundColor: 'rgba(0,0,0,.25)',
+				position: 'fixed',
+				width: '100%',
+				height: '100%',
+				top: 0,
+				left: 0,
+				textAlign: 'center'
+			};
+
+			return _react2.default.createElement(
+				'div',
+				{ style: appStyles },
+				'App',
+				_react2.default.createElement('br', null),
+				this.state.clicks,
+				_react2.default.createElement('br', null),
+				_react2.default.createElement(
+					'button',
+					{ onClick: this.modalHandler },
+					'Open modal'
+				),
+				this.state.showModal ? _react2.default.createElement(
+					'div',
+					{ onClick: this.handleClick },
+					_react2.default.createElement(
+						Modal,
+						null,
+						_react2.default.createElement(
+							'div',
+							{ style: modalStyles },
+							'Modal',
+							_react2.default.createElement(
+								'button',
+								null,
+								'click'
+							)
+						)
+					)
+				) : ''
+			);
+		}
+	}]);
+
+	return App;
+}(_react.Component);
+
+var Modal = function (_Component2) {
+	_inherits(Modal, _Component2);
+
+	function Modal(props) {
+		_classCallCheck(this, Modal);
+
+		return _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+	}
+
+	_createClass(Modal, [{
+		key: 'render',
+		value: function render() {
+			return _reactDom2.default.createPortal(this.props.children, modalNode);
+		}
+	}]);
+
+	return Modal;
+}(_react.Component);
+
+exports.App = App;
 
 /***/ })
 /******/ ]);
